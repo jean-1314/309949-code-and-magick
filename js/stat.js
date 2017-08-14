@@ -52,20 +52,24 @@ window.renderStatistics = function(ctx, names, times) {
   var initialY = 90;
 
   ctx.textBaseline = 'top'; // положение надписи от левого верхнего угла
+
   for(var i = 0; i < times.length; i++) {
     var barHeight = histogramHeight - times[i] * step;
 
-    if (i === 0) {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'rgba(0, 77, 255, 0.5)'
+    var alphaChannel = Math.random().toFixed(2);
+
+    for (var j = 0; j < names.length; j++) {
+      if (names[j] === 'Вы') {
+        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      } else {
+        ctx.fillStyle = 'rgba(0, 77, 255, ' + alphaChannel + ' )';
+      }
     }
 
-    ctx.fillRect(initialX + indent * i, initialY + barHeight, barWidth, times[i] * step);
+    ctx.fillRect(initialX + (indent + barWidth) * i, initialY + barHeight, barWidth, times[i] * step);
 
     ctx.fillStyle = 'black';
-    ctx.fillText(names[i], initialX + barWidth, initialY + indent * i);
-
-
+    ctx.fillText(times[i].toFixed(), initialX + (indent + barWidth) * i, (initialY + barHeight) - 20);
+    ctx.fillText(names[i], initialX + (indent + barWidth) * i, initialY + histogramHeight);
   }
 }
