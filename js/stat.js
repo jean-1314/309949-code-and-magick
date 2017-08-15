@@ -58,12 +58,10 @@ window.renderStatistics = function(ctx, names, times) {
 
     var alphaChannel = Math.random().toFixed(2);
 
-    for (var j = 0; j < names.length; j++) {
-      if (names[j] === 'Вы') {
-        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-      } else {
-        ctx.fillStyle = 'rgba(0, 77, 255, ' + alphaChannel + ' )';
-      }
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = 'rgba(0, 77, 255, ' + alphaChannel + ' )';
     }
 
     ctx.fillRect(initialX + (indent + barWidth) * i, initialY + barHeight, barWidth, times[i] * step);
