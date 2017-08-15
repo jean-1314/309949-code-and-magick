@@ -1,6 +1,6 @@
 'use strict';
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
   ctx.shadowOffsetY = 10;
   ctx.shadowBlur = 10;
@@ -35,7 +35,7 @@ window.renderStatistics = function(ctx, names, times) {
   var max = -1;
   var maxIndex = -1;
 
-  for (var i = 0 ; i < times.length; i++) {
+  for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
       max = time;
@@ -53,7 +53,7 @@ window.renderStatistics = function(ctx, names, times) {
 
   ctx.textBaseline = 'top'; // положение надписи от левого верхнего угла
 
-  for(var i = 0; i < times.length; i++) {
+  for (i = 0; i < times.length; i++) {
     var barHeight = histogramHeight - times[i] * step;
 
     var alphaChannel = Math.random().toFixed(2);
@@ -70,4 +70,4 @@ window.renderStatistics = function(ctx, names, times) {
     ctx.fillText(times[i].toFixed(), initialX + (indent + barWidth) * i, (initialY + barHeight) - 20);
     ctx.fillText(names[i], initialX + (indent + barWidth) * i, initialY + histogramHeight);
   }
-}
+};
