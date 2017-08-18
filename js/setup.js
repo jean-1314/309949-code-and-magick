@@ -54,7 +54,7 @@ var characters = [
   },
 ];
 
-function renderWizard (wizard) {
+function renderWizard(wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
