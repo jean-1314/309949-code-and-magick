@@ -15,14 +15,14 @@ function getCharName() {
   var randLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   charName = randFirstName + ' ' + randLastName;
   return charName;
-};
+}
 
 var randcoatColor;
 function getCoatColor() {
   var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   randcoatColor = coatColors[Math.floor(Math.random() * coatColors.length)];
   return randcoatColor;
-};
+}
 
 var randEyesColor;
 function getEyesColor() {
@@ -54,7 +54,7 @@ var characters = [
   },
 ];
 
-var renderWizard = function (wizard) {
+function renderWizard (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
