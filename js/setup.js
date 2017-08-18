@@ -1,29 +1,73 @@
 'use strict';
 
-var setup = document.querySelector('.setup');
+var userSetup = document.querySelector('.setup');
+userSetup.classList.remove('hidden');
 
-if (setup.classList.contains('hidden')) {
-  setup.classList.remove('hidden');
-};
+var similarListElement = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
 var firstNames = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var lastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var charName;
 
-var randFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-var randLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-var charName = randFirstName + ' ' + randLastName;
-console.log(charName);
+function getCharName() {
+  var randFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+  var randLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+  charName = randFirstName + ' ' + randLastName;
+  return charName;
+};
 
-var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var randcoatColor = coatColors[Math.floor(Math.random() * coatColors.length)];
-console.log(randcoatColor);
+var randcoatColor;
+function getCoatColor() {
+  var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+  randcoatColor = coatColors[Math.floor(Math.random() * coatColors.length)];
+  return randcoatColor;
+};
 
-var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
-var randEyesColor = eyesColors[Math.floor(Math.random() * eyesColors.length)]
-console.log(randEyesColor);
-
-var characters = {
-  name: charName,
-  coatColor: randcoatColor,
-  eyesColor: randEyesColor
+var randEyesColor;
+function getEyesColor() {
+  var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+  randEyesColor = eyesColors[Math.floor(Math.random() * eyesColors.length)];
+  return randEyesColor;
 }
+
+var characters = [
+  {
+    name: getCharName(),
+    coatColor: getCoatColor(),
+    eyesColor: getEyesColor()
+  },
+  {
+    name: getCharName(),
+    coatColor: getCoatColor(),
+    eyesColor: getEyesColor()
+  },
+  {
+    name: getCharName(),
+    coatColor: getCoatColor(),
+    eyesColor: getEyesColor()
+  },
+  {
+    name: getCharName(),
+    coatColor: getCoatColor(),
+    eyesColor: getEyesColor()
+  },
+];
+
+var renderWizard = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+  return wizardElement;
+}
+
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < characters.length; i++) {
+  fragment.appendChild(renderWizard(characters[i]));
+}
+similarListElement.appendChild(fragment);
+
+userSetup.querySelector('.setup-similar').classList.remove('hidden');
