@@ -59,7 +59,7 @@ function init() {
   var fragment = document.createDocumentFragment();
 
   for (var i = 0; i < characters.length; i++) {
-		fragment.appendChild(renderWizard(characters[i], similarWizardTemplate));
+    fragment.appendChild(renderWizard(characters[i], similarWizardTemplate));
   }
 
   similarListElement.appendChild(fragment);
