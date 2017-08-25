@@ -7,6 +7,9 @@ var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var CHARACTERS_NUMBER = 4;
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 var setupOpen = document.querySelector('.setup-open');
 var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
 
@@ -18,29 +21,44 @@ var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var fireball = userSetup.querySelector('.setup-fireball-wrap');
 
-setupOpen.addEventListener('click', function () {
-  userSetup.classList.remove('hidden');
-});
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
 
-setupClose.addEventListener('click', function () {
+var openPopup = function () {
+  userSetup.classList.remove('hidden');
+};
+
+var closePopup = function () {
   userSetup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
 });
 
 setupOpenIcon.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 13) {
-    userSetup.classList.remove('hidden');
+    openPopup();
   }
 });
 
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
-    userSetup.classList.add('hidden');
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
   }
 });
 
 document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 27) {
-    userSetup.classList.add('hidden');
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
   }
 });
 
