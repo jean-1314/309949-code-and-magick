@@ -15,15 +15,15 @@
   var fireball = userSetup.querySelector('.setup-fireball-wrap');
 
   wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = getCoatColor();
+    window.colorizeCoat(wizardCoat);
   });
 
   wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = getEyesColor();
+    window.colorizeEyes(wizardEyes);
   });
 
   fireball.addEventListener('click', function () {
-    fireball.style.background = getFireballColor();
+    window.colorizeFireball(fireball);
   });
 
   function getCharName() {
