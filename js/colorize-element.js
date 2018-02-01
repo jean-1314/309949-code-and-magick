@@ -8,7 +8,11 @@
   window.colorizeElement = function (element, colors) {
     element.addEventListener('click', function () {
       var color = getRandomColor(colors);
-      element.style.fill = color;
+      if (element.tagName.toLowerCase() === 'div') {
+        element.style.backgroundColor = color;
+      } else {
+        element.style.fill = color;
+      }
     })
   };
 })();
