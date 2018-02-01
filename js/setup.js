@@ -10,38 +10,39 @@
   var userSetup = window.util.userSetup;
 
   var setupWizard = document.querySelector('.setup-wizard');
+
   var wizardCoat = setupWizard.querySelector('.wizard-coat');
   var wizardEyes = setupWizard.querySelector('.wizard-eyes');
   var fireball = userSetup.querySelector('.setup-fireball-wrap');
 
-  wizardCoat.addEventListener('click', function () {
-    window.colorizeCoat(wizardCoat);
-  });
+  var fillElement = function(element, color) {
+    element.style.fill = color;
+  };
 
-  wizardEyes.addEventListener('click', function () {
-    window.colorizeEyes(wizardEyes);
-  });
+  var changeElementBackground = function(element, color) {
+    element.style.backgroundColor = color;
+  };
 
-  fireball.addEventListener('click', function () {
-    window.colorizeFireball(fireball);
-  });
+  window.colorizeElement(wizardCoat, COAT_COLORS, fillElement);
+  window.colorizeElement(wizardEyes, EYES_COLORS, fillElement);
+  window.colorizeElement(fireball, FIREBALL_COLORS, changeElementBackground);
+
+  function getCoatColor() {
+    window.colorizeElement(wizardCoat, COAT_COLORS, fillElement);
+  }
+
+  function getEyesColor() {
+    window.colorizeElement(wizardEyes, EYES_COLORS, fillElement);
+  }
+
+  function getFireballColor() {
+    window.colorizeElement(fireball, FIREBALL_COLORS, changeElementBackground);
+  }
 
   function getCharName() {
     var randFirstName = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
     var randLastName = LAST_NAMES[Math.floor(Math.random() * LAST_NAMES.length)];
     return randFirstName + ' ' + randLastName;
-  }
-
-  function getCoatColor() {
-    return COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)];
-  }
-
-  function getFireballColor() {
-    return FIREBALL_COLORS[Math.floor(Math.random() * FIREBALL_COLORS.length)];
-  }
-
-  function getEyesColor() {
-    return EYES_COLORS[Math.floor(Math.random() * EYES_COLORS.length)];
   }
 
   function getRandCharParams() {
@@ -54,11 +55,9 @@
 
   function createCharacters(charactersNumber) {
     var wizards = [];
-
     for (var i = 0; i < charactersNumber; i++) {
       wizards[i] = getRandCharParams();
     }
-
     return wizards;
   }
 
@@ -73,7 +72,6 @@
   }
 
   function init() {
-
     var similarListElement = document.querySelector('.setup-similar-list');
     var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
